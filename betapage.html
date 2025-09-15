@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Artune - Creative Agency Website 2</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --muted: #8b8b8b;
+      --accent: #007a79;
+      --accent-dark: #006a66;
+      --input-bg: #ffffff;
+      --max-center-width: 1200px;
+      --p: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --logo-font: "Bruno Ace", var(--p);
+    }
+
+    html,body{ height:100%; margin:0; font-family:var(--p); background:var(--bg); color:#111; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-x:hidden; }
+
+    /* page shell */
+    .page { min-height:100vh; display:flex; flex-direction:column; align-items:stretch; position:relative; }
+
+   
+    .background-solar{
+        opacity: 0.5;
+      position:absolute;
+      inset:0; 
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:0; 
+      pointer-events:none;
+      overflow:hidden;
+    }
+   
+
+    .background-solar img.beta-svg{
+      max-width:1400px;
+      width:120vw; 
+      height:auto;
+      display:block;
+      opacity:0.7;
+      transform-origin:center center;
+      will-change:transform, opacity;
+     
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
+    /* NAVBAR */
+    header.nav {  transition: background 0.3s ease, backdrop-filter 0.3s ease; display:flex; align-items:center; justify-content:space-between; padding:28px 72px; gap:24px; position:relative; z-index:30; }
+    .nav-left { display:flex; align-items:center; gap:16px; min-width:120px; }
+    .logo { font-family:var(--logo-font); font-size:20px; letter-spacing:1px; font-weight:400; color:#000; display:flex; align-items:center; height:28px; }
+    .nav-right { display:flex; gap:16px; align-items:center; z-index:30; }
+    .nav-link { display:inline-flex; align-items:center; gap:10px; background:#f4f4f4; padding:10px 18px; border-radius:28px; font-size:14px; color:#333; text-decoration:none; box-shadow: 0 1px 0 rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.04); }
+    .nav-link:hover { transform: translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    .nav-link .arrow-placeholder{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; }
+    .nav-link .arrow-placeholder img{ width:12px; height:12px; display:block; object-fit:contain; }
+    .nav-cta { padding:10px 22px; border-radius:28px; border:1px solid rgba(0,0,0,0.12); background:transparent; }
+
+    /* HERO */
+    main.hero { position:relative; flex:1 0 auto; display:flex; align-items:center; justify-content:center; padding:0 32px; overflow:visible; min-height:640px; z-index:20; }
+    .hero-inner { position:relative; z-index:40; width:100%; max-width:var(--max-center-width); text-align:center; padding:60px 24px; box-sizing:border-box; }
+
+    .center-logo { width:48px; height:60px; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; }
+    .center-logo img{ max-height:60px; width:auto; display:block; }
+
+    h1 { margin:0 0 16px; font-weight:600; font-size:52px; letter-spacing:0.2px; font-family:var(--p); color:#0f1720; }
+    .sub { color:var(--muted); margin-bottom:28px; font-size:16px; font-weight:400; }
+
+    .signup { display:flex; align-items:center; justify-content:center; margin: 14px auto 28px; }
+    .input-wrap { display:flex; width:640px; max-width:calc(100% - 48px); background:var(--input-bg); border-radius:10px; box-shadow: 0 12px 30px rgba(18,25,40,0.06); border:1px solid rgba(0,0,0,0.06); overflow:hidden; transition:transform .18s ease, box-shadow .18s ease; }
+    input[type="email"]{ flex:1 1 auto; border:0; outline:0; padding:16px 20px; font-size:15px; font-family:var(--p); color:#111; background:transparent; }
+    button.join-btn{ background:var(--accent); color:#fff; border:0; padding:12px 22px; display:inline-block; font-weight:600; cursor:pointer; border-left:1px solid rgba(0,0,0,0.06); min-width:120px; transition:transform .15s ease, box-shadow .15s ease, background .12s ease; font-size:14px; }
+    button.join-btn:hover{ box-shadow:0 8px 28px rgba(0,122,121,0.22); background: linear-gradient(180deg,var(--accent),var(--accent-dark)); }
+
+    .hero-note { color:var(--muted); margin-top:10px; font-size:13px; }
+    .hero-quote { margin-top:36px; font-size:13px; color:#222; opacity:0.7; font-style:italic; }
+
+    .fade-up { opacity:0; transform:translateY(12px); animation:fadeUp .7s cubic-bezier(.2,.9,.25,1) forwards; }
+    .fade-up.delay-1 { animation-delay:.12s; } .fade-up.delay-2 { animation-delay:.22s; } .fade-up.delay-3 { animation-delay:.34s; }
+    @keyframes fadeUp { to { opacity:1; transform:none; } }
+
+    @media (max-width:900px){ header.nav { padding:18px 20px; } h1 { font-size:34px; } .input-wrap { width:100%; max-width:520px; } .background-solar img.beta-svg{ width:140vw; filter: blur(14px); } }
+    @media (max-width:520px){ header.nav { padding:14px 14px; } .nav-right { gap:10px; } .nav-link { padding:8px 12px; font-size:13px; border-radius:22px; } main.hero { min-height:520px; padding-top:22px; padding-bottom:42px; } h1 { font-size:26px; } .input-wrap{ display:block; padding:0; border-radius:10px; overflow:visible; } input[type="email"]{ padding:14px; width:100%; box-sizing:border-box; } button.join-btn{ width:100%; margin-top:10px; border-radius:8px; min-width:0; } }
+
+    .hero-inner::before { content:""; position:absolute; left:50%; top:62%; transform:translateX(-50%); width:760px; height:420px; background:radial-gradient(closest-side, rgba(0,122,121,0.06), transparent 60%); z-index:5; filter:blur(26px); opacity:.9; pointer-events:none; }
+
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="nav" aria-label="Main navigation">
+      <div class="nav-left">
+        <div class="logo">
+          <span style="display:inline-block; height:28px; line-height:28px; font-family: Bruno Ace;">noteroom</span>
+        </div>
+      </div>
+
+      <nav class="nav-right" role="navigation" aria-label="Top links">
+        <a class="nav-link" href="#about">About <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+        <a class="nav-link" href="#career">Career <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+        <a class="nav-link" href="#blog">Blog <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+        <a class="nav-link nav-cta" href="#try">Try NoteRoom <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+      </nav>
+    </header>
+
+    <main class="hero" role="main">
+      <div class="hero-inner">
+        <div class="center-logo fade-up delay-1">
+          <img src="NoteRoomLogoNew.png" alt="NoteRoom logo" id="center-logo-img" />
+        </div>
+
+        <h1 style="font-weight: 400;" class="fade-up delay-2"><em>NoteRoom</em> is in the beta stage</h1>
+
+        <p class="sub fade-up delay-3">Apply for a beta-user token if you want to test the platform</p>
+
+        <div class="signup fade-up delay-3" role="form" aria-label="Join the beta">
+          <div class="input-wrap" id="inputWrap">
+            <input id="emailInput" type="email" placeholder="Enter your email" aria-label="Enter your email">
+            <button style="font-weight: 400; font-family: poppins;" id="joinBtn" class="join-btn" type="button" aria-label="Join the beta">Join the beta</button>
+          </div>
+        </div>
+
+        <div class="hero-note fade-up delay-3">
+          If you are a VC, visit our pitch deck <a href="#" style="color:inherit; text-decoration:underline">NoteRoom</a>
+        </div>
+
+        <div class="hero-quote fade-up delay-3">"Be where ideas are"</div>
+      </div>
+    </main>
+
+     <div class="background-solar" aria-hidden="true">
+      <img id="bg-nebula" class="beta-svg" src="beta.svg" alt="nebula background" />
+    </div>
+
+  </div>
+
+  <script>
+   (function(){
+      const neb = document.getElementById('bg-nebula');
+      if(!neb) return;
+
+     
+      const rotateSpeed = 0.0002; 
+      const driftAmpX = 18; 
+      const driftAmpY = 10; 
+      const pulseFreq = 0.00099;
+      const baseScale = 1.02;
+      const pulseAmp = 0.015; 
+
+    
+      let pointerX = 0, pointerY = 0; 
+      const maxParallaxX = 0; 
+      const maxParallaxY = 0; 
+
+      let start = null;
+
+     
+      function tick(ts){
+        if(!start) start = ts;
+        const t = ts - start;
+
+        const rot = t * rotateSpeed; 
+        const pulse = baseScale + Math.sin(t * pulseFreq * Math.PI * 2) * pulseAmp;
+
+        
+        const dx = Math.sin(t * 0.0007) * driftAmpX + pointerX * maxParallaxX;
+        const dy = Math.cos(t * 0.0005) * driftAmpY + pointerY * maxParallaxY;
+
+       
+        const deg = rot * (180/Math.PI); 
+        const transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${deg.toFixed(3)}deg) scale(${pulse.toFixed(4)})`;
+        neb.style.transform = transform;
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      function onPointerMove(e){
+        const rect = neb.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        const nx = (e.clientX - cx) / (rect.width/2);
+        const ny = (e.clientY - cy) / (rect.height/2);
+       
+        pointerX = Math.max(-1, Math.min(1, nx)) * 0.45;
+        pointerY = Math.max(-1, Math.min(1, ny)) * 0.25;
+      }
+      window.addEventListener('pointermove', onPointerMove);
+
+      function reduceIntensity() { pointerX = 0; pointerY = 0; }
+      window.addEventListener('touchstart', reduceIntensity, {passive:true});
+      window.addEventListener('touchend', reduceIntensity, {passive:true});
+
+    })();
+
+    (function(){
+      const btn = document.getElementById('joinBtn');
+      const email = document.getElementById('emailInput');
+      if(btn && email){
+        btn.addEventListener('click', function(){
+          const v = email.value.trim();
+          if(!v){
+            email.focus();
+            email.style.boxShadow = "0 0 0 3px rgba(255,80,80,0.12)";
+            setTimeout(()=> email.style.boxShadow = "", 1200);
+            return;
+          }
+          btn.disabled = true;
+          btn.innerText = "Joined ✓";
+          btn.style.cursor = "default";
+          setTimeout(()=> {
+            btn.disabled = false;
+            btn.innerText = "Join the beta";
+          }, 2400);
+        });
+        email.addEventListener('focus', () => document.getElementById('inputWrap').style.boxShadow = "0 16px 40px rgba(0,0,0,0.08)");
+        email.addEventListener('blur', () => document.getElementById('inputWrap').style.boxShadow = "");
+      }
+    })();
+  </script>
+</body>
+</html>

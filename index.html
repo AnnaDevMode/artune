@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Artune - Creative Agency Website</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --muted: #9b9b9b;
+      --accent: #0f0f0f;
+      --pill-bg: rgba(0,0,0,0.03);
+      --pill-hover: rgba(0,0,0,0.06);
+      --cta-bg: #1f1f1f;
+      --cta-text: #ffffff;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+    header.nav { 
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      padding:28px 72px; 
+      gap:24px; 
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:30; 
+      background: transparent; 
+      transition: background 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .nav-left { display:flex; align-items:center; gap:16px; min-width:120px; }
+    .logo { font-family:var(--logo-font); font-size:20px; letter-spacing:1px; font-weight:400; color:#000; display:flex; align-items:center; height:28px; }
+    .nav-right { display:flex; gap:16px; align-items:center; z-index:30; }
+    .nav-link { display:inline-flex; align-items:center; gap:10px; background:#f4f4f4; padding:10px 18px; border-radius:28px; font-size:14px; color:#333; text-decoration:none; box-shadow: 0 1px 0 rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;}
+    .nav-link:hover { transform: translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    .nav-link .arrow-placeholder{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; }
+    .nav-link .arrow-placeholder img{ width:12px; height:12px; display:block; object-fit:contain; }
+    .nav-cta { padding:10px 22px; border-radius:28px; border:1px solid rgba(0,0,0,0.12); background:transparent; }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:48px 80px;
+      opacity:0;
+      transform: translateY(12px);
+      animation:heroFadeIn 1.2s ease-out forwards 0.3s;
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity:0; transform:translateY(12px);}
+      to { opacity:1; transform:translateY(0);}
+    }
+
+    .hero-content{
+      max-width:1200px;
+      width:100%;
+      text-align:center;
+      position: relative;
+      z-index:20;
+      margin:0 auto;
+      transform:translateY(-40px);
+      opacity:0;
+      animation:fadeUp 0.9s ease 0.25s forwards;
+    }
+
+    @keyframes fadeUp {
+      from {opacity:0; transform: translateY(12px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+
+    h1{
+      font-size:64px;
+      line-height:1.02;
+      margin:0 0 18px 0;
+      font-weight:400;
+      letter-spacing:-0.6px;
+    }
+    .sub{
+      color:var(--muted);
+      font-weight:400;
+      margin-bottom:34px;
+      font-size:18px;
+      opacity:0;
+      animation:fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .cta-wrap{
+      display:inline-block;
+      position:relative;
+    }
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:14px;
+      background:var(--cta-bg);
+      color:var(--cta-text);
+      padding:16px 28px;
+      border-radius:999px;
+      font-weight:300;
+      font-size:16px;
+      text-decoration:none;
+      box-shadow: 0 6px 24px rgba(31,31,31,0.12);
+      position:relative;
+      z-index:2;
+      overflow:visible;
+      transform: scale(0.95);
+      opacity:0;
+      animation:ctaFade 1s ease 0.7s forwards;
+    }
+    .cta .cta-label{white-space:nowrap}
+    .cta .cta-icon{
+      width:34px;height:34px;border-radius:50%;
+      display:inline-grid;place-items:center;
+      background:rgba(255,255,255,0.08);
+      border:2px solid rgba(255,255,255,0.06);
+    }
+    @keyframes ctaFade {
+      from {opacity:0; transform:scale(0.95);}
+      to {opacity:1; transform:scale(1);}
+    }
+    .cta:hover {
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--accent);
+      box-shadow:
+        0 8px 28px rgba(31, 31, 31, 0.16),
+        0 0 18px rgba(255, 255, 255, 0.12);
+      transform: translateY(-3px) scale(1.01);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+
+    /* Background Solar SVG */
+    
+    .background-solar { position: absolute; top: 50%; left: 50%; width: 1000px; height: 1000px; transform: translate(-50%, -50%); z-index: 0; opacity: 1; } .solar-svg { width: 100%; height: 100%; animation: rotate-solar 60s linear infinite; transform-origin: center center; } /* Rotation animation */ @keyframes rotate-solar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    
+    @keyframes solarFade {
+      from {opacity:0; transform: translate(-50%, -50%) scale(0.9);}
+      to {opacity:1; transform: translate(-50%, -50%) scale(1);}
+    }
+    
+
+    .cta .cta-icon img { width: 30px; height: 30px; }
+
+    @media (max-width:1000px){
+      .hero{ padding:28px 28px; }
+      h1{ font-size:44px }
+    }
+    @media (max-width:640px){
+      .nav { top:18px; left:16px; right:16px; }
+      .logo{font-size:18px}
+      h1{ font-size:28px; line-height:1.02 }
+      .hero-content{ transform:none }
+      .bg-svg{ left:50%; width:220% }
+      .pill{ padding:8px 12px; font-size:13px }
+      .cta{ padding:12px 18px; font-size:15px }
+      .pills{ display:none }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nav" aria-label="Main navigation">
+    <div class="nav-left">
+      <div class="logo">
+        <span style="display:inline-block; height:28px; line-height:28px; font-family: Bruno Ace;">noteroom</span>
+      </div>
+    </div>
+
+    <nav class="nav-right" role="navigation" aria-label="Top links">
+      <a class="nav-link" href="#about">About <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+      <a class="nav-link" href="#career">Career <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+      <a class="nav-link" href="#blog">Blog <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+      <a class="nav-link nav-cta" href="#try">Try NoteRoom <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero" role="main" aria-label="NoteRoom Landing">
+    <div class="hero-content" role="region" aria-labelledby="hero-heading" style="margin-top: 80px;">
+      <h1 id="hero-heading">A social platform designed for<br>making you <em>smarter</em> and more<br>creative</h1>
+      <div class="sub">Simply put "Be where <em>Ideas</em> are"</div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="cta-wrap" aria-hidden="false">
+          <a class="cta" href="betapage.html" id="main-cta" role="button">
+            <span class="cta-label">Try NoteRoom</span>
+            <span class="cta-icon" aria-hidden="true">
+             <img src="nr download button.png">
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="background-solar">
+      <img src="noteroom circle.svg" alt="Solar System" class="solar-svg" />
+    </div>
+  </main>
+
+  <script>
+    (function(){
+      // CTA subtle pulsation
+      const cta = document.querySelector('.cta');
+      setInterval(() => {
+        if(!cta) return;
+        cta.animate([
+          { transform: 'scale(1)'},
+          { transform: 'scale(1.02)'},
+          { transform: 'scale(1)'}
+        ], {
+          duration: 2500 + Math.random()*1200,
+          easing: 'ease-in-out'
+        });
+      }, 3200);
+
+     
+
+      // CTA focus shadow
+      cta.addEventListener('focus', ()=> cta.style.boxShadow = '0 8px 36px rgba(31,31,31,0.14)');
+      cta.addEventListener('blur', ()=> cta.style.boxShadow = '0 6px 24px rgba(31,31,31,0.12)');
+
+    })();
+  </script>
+</body>
+</html>
