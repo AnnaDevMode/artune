@@ -19,6 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Icons + GSAP -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 
@@ -176,6 +177,9 @@
   margin: 0 auto;
   padding: 0 0;
   box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .carousel-track {
@@ -187,10 +191,10 @@
 .carousel-preview {
   flex: 0 0 95%;
   max-width: 1200px;
-  opacity: 0.5;
-  transform: scale(0.9);
-  transition: transform 0.4s ease, opacity 0.4s ease;
-}
+  opacity: 0.65;
+   transform:scale(0.9); transition: transform 560ms cubic-bezier(.2,.8,.2,1), opacity 420ms ease;
+  transform: translateX(0) scale(0.9); opacity:0.6; }
+
 
 .carousel-center {
   flex: 0 0 100%;
@@ -201,23 +205,24 @@
 }
 
 .carousel-card {
-   flex: 0 0 50%; 
+   flex: 0 0 auto; 
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 16/9;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  transform: scale(0.9);
-  opacity: 0.6;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform-origin:center center;
+  transition: transform 560ms cubic-bezier(.2,.8,.2,1), opacity 420ms ease;
+  opacity:0.6;
+  transform: scale(0.92) translateX(0);
 }
 .carousel-card.active {
-  flex: 0 0 100%;
-  max-width: 1200px;
-  transform: scale(1);
-  opacity: 1;
   z-index: 2;
+  transform: scale(1) translateX(0);
+  opacity:1;
+  transition: transform 560ms cubic-bezier(.2,.8,.2,1), opacity 420ms ease;
+
 }
 
 .carousel-img {
@@ -317,17 +322,24 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+@keyframes slideInFromRight { from { transform: translateX(80px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
+@keyframes slideInFromLeft  { from { transform: translateX(-80px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
+
+.carousel-card.active.animate-from-right { animation: slideInFromRight 0.6s ease forwards; }
+.carousel-card.active.animate-from-left  { animation: slideInFromLeft 0.6s ease forwards; }
+
+
 /* Grid Section */
 
 .fade-in {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(30px) rotate(-3deg) scale(0.95);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .fade-in.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) rotate(0deg) scale(1);
 }
 
 .fade-in-up {
@@ -339,6 +351,14 @@
 .fade-in-up.visible {
   opacity: 1;
   transform: translateY(0);
+  animation: bounceUp 0.6s ease forwards;
+}
+
+@keyframes bounceUp {
+  0% { transform: translateY(30px); }
+  60% { transform: translateY(-10px); }
+  80% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
 }
 
 
@@ -363,6 +383,14 @@
   flex-direction: column;
   gap: 10px;
   transition: transform 0.3s ease;
+  transform: translateY(20px) rotateX(5deg);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+
+.video-card:hover {
+  transform: translateY(-5px) rotateX(0deg) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
 .video-thumb-wrapper {
@@ -385,7 +413,8 @@
 }
 
 .video-thumb-wrapper:hover .video-thumb {
-  transform: scale(1.05);
+  transform: scale(1.05) rotateZ(-1deg);
+  transition: transform 0.5s ease-out;
 }
 
 /* Title below image */
@@ -403,6 +432,13 @@
   align-items: center;
   font-size: 0.85rem;
   color: #535151;
+   transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.video-card:hover .video-card-meta {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .left-meta {
@@ -414,6 +450,17 @@
 .right-meta {
   color: #535151;
 }
+.left-meta, .right-meta {
+  transform: translateX(-5px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.video-card:hover .left-meta,
+.video-card:hover .right-meta {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 
 .video-card .profile-pic {
   width: 22px;
@@ -429,15 +476,31 @@
   animation: fadeUp 0.6s ease forwards;
 }
 
-.video-card:nth-child(1) { animation-delay: 0.1s; }
-.video-card:nth-child(2) { animation-delay: 0.2s; }
-.video-card:nth-child(3) { animation-delay: 0.3s; }
-.video-card:nth-child(4) { animation-delay: 0.4s; }
-.video-card:nth-child(5) { animation-delay: 0.5s; }
-.video-card:nth-child(6) { animation-delay: 0.6s; }
-.video-card:nth-child(7) { animation-delay: 0.7s; }
-.video-card:nth-child(8) { animation-delay: 0.8s; }
-.video-card:nth-child(9) { animation-delay: 0.9s; }
+.video-card:nth-child(1) { animation-delay: 0.1s; animation-name: fadeUpSkew; }
+.video-card:nth-child(2) { animation-delay: 0.2s; animation-name: fadeUpSkew; }
+.video-card:nth-child(3) { animation-delay: 0.3s; animation-name: fadeUpSkew; }
+.video-card:nth-child(4) { animation-delay: 0.4s; animation-name: fadeUpSkew; }
+.video-card:nth-child(5) { animation-delay: 0.5s; animation-name: fadeUpSkew;}
+.video-card:nth-child(6) { animation-delay: 0.6s; animation-name: fadeUpSkew;}
+.video-card:nth-child(7) { animation-delay: 0.7s; animation-name: fadeUpSkew;}
+.video-card:nth-child(8) { animation-delay: 0.8s; animation-name: fadeUpSkew;}
+.video-card:nth-child(9) { animation-delay: 0.9s; animation-name: fadeUpSkew;}
+
+
+@keyframes fadeUpSkew {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) skewY(3deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) skewY(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewY(0deg);
+  }
+}
 
 @keyframes fadeUp {
   to {
@@ -445,6 +508,44 @@
     transform: translateY(0);
   }
 }
+
+/* --- Base for scroll animation --- */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
+/* Optional: bounce on entry */
+.scroll-animate.bounce {
+   opacity: 0;
+  transform: translateY(30px);
+  animation: bounceUp 0.6s ease forwards;
+}
+
+@keyframes bounceUp {
+  0% { transform: translateY(30px);opacity: 0; }
+  60% { transform: translateY(-10px);opacity: 1; }
+  80% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Video card specific */
+.video-card.scroll-animate {
+  transform: translateY(20px) skewY(3deg);
+}
+
+.video-card.scroll-animate.visible {
+  animation: fadeUpSkew 0.6s ease forwards;
+}
+
+@keyframes fadeUpSkew {
+  0% { opacity: 0; transform: translateY(20px) skewY(3deg); }
+  60% { opacity: 1; transform: translateY(-5px) skewY(-2deg); }
+  100% { opacity: 1; transform: translateY(0) skewY(0deg); }
+}
+
 
 /* More Button */
 .more-section {
@@ -483,37 +584,6 @@
   50% { transform: translateY(6px); }
 }
 
-
-/* Keyframes for entering */
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(80px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-80px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.carousel-card.active.animate-from-right {
-  animation: slideInFromRight 0.6s ease forwards;
-}
-
-.carousel-card.active.animate-from-left {
-  animation: slideInFromLeft 0.6s ease forwards;
-}
 
 .video-grid-section.scroll-animate {
   opacity: 0;
@@ -1009,196 +1079,224 @@
 
 <script>
 
-
-  
 const previews = [
-  {
-    img: 'img1.jpg',
-    title: 'Title 1'
-  },
-  {
-    img: 'img2.jpg',
-    title: 'Title 2'
-  },
-  {
-    img: 'img3.jpg',
-    title: 'Title 3'
-  }
+  { img: 'img1.jpg', title: 'Title 1' },
+  { img: 'img2.jpg', title: 'Title 2' },
+  { img: 'img3.jpg', title: 'Title 3' }
 ];
 
 let index = 0;
-let autoSlideInterval;
+let isAnimating = false;
+let autoSlideInterval = null;
+const DURATION = 300;
+const EASE = 'cubic-bezier(.2,.8,.2,1)';
 
-const updateCarousel = () => {
-  const track = document.querySelector('.carousel-track');
-track.style.transform = 'translateX(-100%)'; 
+const leftCard = document.querySelector('.left-preview .carousel-card');
+const centerCard = document.querySelector('.carousel-center .carousel-card');
+const rightCard = document.querySelector('.right-preview .carousel-card');
+
+const leftImg = document.querySelector('.left-preview .carousel-img');
+const centerImg = document.querySelector('.carousel-center .carousel-img');
+const rightImg = document.querySelector('.right-preview .carousel-img');
+
+const navDots = Array.from(document.querySelectorAll('.nav-dot'));
+const btnNext = document.querySelector('.carousel-btn.next');
+const btnPrev = document.querySelector('.carousel-btn.prev');
+
+// Update images and dots without animation
+const updateStatic = () => {
+  const total = previews.length;
+  const prevIndex = (index - 1 + total) % total;
+  const nextIndex = (index + 1) % total;
+
+  leftImg.src = previews[prevIndex].img;
+  centerImg.src = previews[index].img;
+  rightImg.src = previews[nextIndex].img;
+
+  navDots.forEach((d,i)=>d.classList.toggle('active', i===index));
+};
+
+// Slide function
+const slide = (direction) => {
+  if(isAnimating) return;
+  isAnimating = true;
 
   const total = previews.length;
   const prevIndex = (index - 1 + total) % total;
   const nextIndex = (index + 1) % total;
 
-  const leftPreview = document.querySelector('.left-preview .carousel-img');
-  const rightPreview = document.querySelector('.right-preview .carousel-img');
-  const centerImage = document.querySelector('.carousel-center .carousel-img');
-  const centerTitle = document.querySelector('.carousel-center .carousel-title');
+  const outgoing = centerCard;
+  const incoming = direction === 'next' ? rightCard : leftCard;
+  const staticCard = direction === 'next' ? leftCard : rightCard;
 
-  leftPreview.src = previews[prevIndex].img;
-  rightPreview.src = previews[nextIndex].img;
+  // Set incoming image
+  incoming.querySelector('.carousel-img').src = direction === 'next' ? previews[nextIndex].img : previews[prevIndex].img;
 
-  centerImage.classList.add('fade-slide');
+  // Set transitions
+  [outgoing, incoming, staticCard].forEach(c => {
+    c.style.transition = `transform ${DURATION}ms ${EASE}, opacity ${DURATION}ms ${EASE}`;
+  });
+
+  // Set start positions
+  outgoing.style.transform = 'translateX(0) scale(1)';
+  outgoing.style.opacity = '1';
+
+  // FIX: incoming starts offscreen on correct side
+  incoming.style.transform = direction==='next' ? 'translateX(100%) scale(0.92)' : 'translateX(-100%) scale(0.92)';
+  incoming.style.opacity = '0.75';
+
+  staticCard.style.transform = 'translateX(0) scale(0.9)';
+  staticCard.style.opacity = '0.6';
+
+  // Animate
+  requestAnimationFrame(() => {
+    outgoing.style.transform = `translateX(${direction==='next'?-100:100}%) scale(0.92)`;
+    outgoing.style.opacity = '0.6';
+
+    incoming.style.transform = 'translateX(0) scale(1)';
+    incoming.style.opacity = '1';
+
+    staticCard.style.transform = `translateX(${direction==='next'?-20:20}px) scale(0.86)`;
+    staticCard.style.opacity = '0.45';
+  });
+
+  // After animation
   setTimeout(() => {
-    centerImage.src = previews[index].img;
-    centerImage.classList.remove('fade-slide');
-  }, 100);
+    index = direction === 'next' ? nextIndex : prevIndex;
+    updateStatic();
 
-  document.querySelectorAll('.nav-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
-  });
+    [outgoing, incoming, staticCard].forEach(c => {
+      c.style.transition = '';
+      c.style.transform = '';
+      c.style.opacity = '';
+    });
+
+    isAnimating = false;
+  }, DURATION);
 };
 
-
-const goNext = () => {
-  index = (index + 1) % previews.length;
-  updateCarousel();
-};
-
-const goPrev = () => {
-  index = (index - 1 + previews.length) % previews.length;
-  updateCarousel();
-};
-
-document.querySelector('.carousel-btn.next').addEventListener('click', () => {
-  goNext();
+// Event listeners
+btnNext.addEventListener('click', () => { slide('next'); resetAutoSlide(); });
+btnPrev.addEventListener('click', () => { slide('prev'); resetAutoSlide(); });
+navDots.forEach((dot,i)=>dot.addEventListener('click', ()=>{
+  if(i===index || isAnimating) return;
+  const total = previews.length;
+  const delta = (i-index+total)%total;
+  if(delta===1) slide('next');
+  else if(delta===total-1) slide('prev');
+  else { index=i; updateStatic(); }
   resetAutoSlide();
-});
+}));
 
-document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
-  goPrev();
-  resetAutoSlide();
-});
-
-document.querySelectorAll('.dot').forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    index = i;
-    updateCarousel();
-    resetAutoSlide();
-  });
-});
-
-const startAutoSlide = () => {
-  autoSlideInterval = setInterval(goNext, 5000);
-};
-
-const resetAutoSlide = () => {
+// Auto-slide
+function startAutoSlide(){
   clearInterval(autoSlideInterval);
-  startAutoSlide();
-};
+  autoSlideInterval = setInterval(()=>{ if(!isAnimating) slide('next'); },5000);
+}
+function resetAutoSlide(){ startAutoSlide(); }
 
 // Init
-updateCarousel();
+updateStatic();
 startAutoSlide();
 
 
+// === Fade-in Elements on Scroll ===
+const fadeIns = document.querySelectorAll('.fade-in');
+const fadeInsUp = document.querySelectorAll('.fade-in-up');
 
-const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.1 };
 
-const appearOptions = {
-  threshold: 0.1
-};
-
-const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+const fadeObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
+
     entry.target.classList.add('visible');
-    appearOnScroll.unobserve(entry.target);
+
+    // Trigger bounce for fade-in-up elements
+    if (entry.target.classList.contains('fade-in-up')) {
+      entry.target.style.animation = 'none';
+      void entry.target.offsetWidth; // trigger reflow
+      entry.target.style.animation = 'bounceUp 0.6s ease forwards';
+    }
+
+    observer.unobserve(entry.target);
   });
 }, appearOptions);
 
-faders.forEach(fader => {
-  appearOnScroll.observe(fader);
-});
+fadeIns.forEach(el => fadeObserver.observe(el));
+fadeInsUp.forEach(el => fadeObserver.observe(el));
 
-const finalImage = document.querySelector('.final-image-section');
+// === Video Cards Scroll Animation ===
+const videoCards = document.querySelectorAll('.video-card.scroll-animate');
 
-const imageObserver = new IntersectionObserver((entries) => {
+const videoObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      finalImage.classList.add('visible');
-    } else {
-      finalImage.classList.remove('visible');
-    }
+    if (!entry.isIntersecting) return;
+
+    const el = entry.target;
+    el.classList.add('visible');
+
+    // Trigger staggered fadeUpSkew + bounce
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = `fadeUpSkew 0.6s ease forwards, bounceUp 0.6s ease forwards`;
+
+    observer.unobserve(el);
   });
-}, {
-  threshold: 0.1
-});
+}, { threshold: 0.2 });
 
-if (finalImage) {
-  imageObserver.observe(finalImage);
-}
+videoCards.forEach(el => videoObserver.observe(el));
 
-window.addEventListener('load', () => {
-  document.body.classList.add('loaded');
-});
+// === Reveal & Image Scroll Zoom ===
+const revealElements = document.querySelectorAll('.reveal, .img-scroll-zoom');
 
-const Observe = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     } else {
-      entry.target.classList.remove('visible'); 
+      entry.target.classList.remove('visible'); // optional: animate again when scrolling back
     }
   });
-}, {
-  threshold: 0.1
-});
+}, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal, .img-scroll-zoom').forEach(el => observer.observe(el));
+revealElements.forEach(el => revealObserver.observe(el));
 
-const finalImageSection = document.querySelector('.final-image-section');
-if (finalImageSection) {
-  observer.observe(finalImageSection);
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const gridSection = document.querySelector('.video-grid-section');
-  if (!gridSection) return;
-
-  gridSection.classList.add('scroll-animate');
-
-  const observer = new IntersectionObserver((entries, obs) => {
+// === Final Image Section ===
+const finalImage = document.querySelector('.final-image-section');
+if (finalImage) {
+  const finalObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        gridSection.classList.add('visible');
-        obs.unobserve(entry.target); 
+        finalImage.classList.add('visible');
+      } else {
+        finalImage.classList.remove('visible');
       }
     });
-  }, {
-    threshold: 0.2
-  });
+  }, { threshold: 0.1 });
 
-  observer.observe(gridSection);
-});
+  finalObserver.observe(finalImage);
+}
 
-
+// === Page Load Class ===
 window.addEventListener('load', () => {
   document.body.classList.add('loaded');
 
+  // Mobile menu toggle
   const menuIcon = document.querySelector('.mobile-menu-icon');
   menuIcon?.addEventListener('click', () => {
     alert("Nav menu toggled (implement dropdown if needed)");
   });
 });
 
-/* Mobile menu */
-const hamburger=document.getElementById('hamburger');
-const mobileMenu=document.getElementById('mobileMenu');
-let menuOpen=false;
-hamburger?.addEventListener('click',()=>{
-  menuOpen=!menuOpen;
-  mobileMenu.style.display=menuOpen?'flex':'none';
+// === Mobile Hamburger Menu ===
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+hamburger?.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.style.display = menuOpen ? 'flex' : 'none';
 });
-
 
 </script>
 
