@@ -509,7 +509,6 @@
   }
 }
 
-/* --- Base for scroll animation --- */
 .scroll-animate {
   opacity: 0;
   transform: translateY(30px);
@@ -517,7 +516,6 @@
 }
 
 
-/* Optional: bounce on entry */
 .scroll-animate.bounce {
    opacity: 0;
   transform: translateY(30px);
@@ -531,7 +529,6 @@
   100% { transform: translateY(0); }
 }
 
-/* Video card specific */
 .video-card.scroll-animate {
   transform: translateY(20px) skewY(3deg);
 }
@@ -1103,7 +1100,6 @@ const navDots = Array.from(document.querySelectorAll('.nav-dot'));
 const btnNext = document.querySelector('.carousel-btn.next');
 const btnPrev = document.querySelector('.carousel-btn.prev');
 
-// Update images and dots without animation
 const updateStatic = () => {
   const total = previews.length;
   const prevIndex = (index - 1 + total) % total;
@@ -1141,7 +1137,6 @@ const slide = (direction) => {
   outgoing.style.transform = 'translateX(0) scale(1)';
   outgoing.style.opacity = '1';
 
-  // FIX: incoming starts offscreen on correct side
   incoming.style.transform = direction==='next' ? 'translateX(100%) scale(0.92)' : 'translateX(-100%) scale(0.92)';
   incoming.style.opacity = '0.75';
 
