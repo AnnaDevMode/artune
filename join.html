@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NoteRoom Join Team</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="joinstyle.css">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="nav" aria-label="Main navigation">
+      <div class="nav-left">
+        <div class="logo">
+          <span style="display:inline-block; height:28px; line-height:28px; font-family: Bruno Ace;">noteroom</span>
+        </div>
+      </div>
+
+      <nav class="nav-right" role="navigation" aria-label="Top links">
+        <a class="nav-link" href="#about">About <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+        <a class="nav-link" href="#career">Career <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+        <a class="nav-link" href="blog.html">Blog <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+        <a class="nav-link nav-cta" href="join.html">Try NoteRoom <span class="arrow-placeholder" aria-hidden="true"><img src="Arrow up-right.png" alt=""></span></a>
+      </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+  <section class="hero">
+    <h1><em>Ideas</em> live here. So do <em>we.</em></h1>
+    <p class="sub-text">Join a team where curiosity fuels collaboration and ideas shape the way the world learns.</p>
+    <div class="hero-img">
+      <img src="office.png" alt="Office">
+    </div>
+    <p class="hero-text">
+      NoteRoom is a social media designed for making people smarter and more creative. 
+      Its sole purpose is to make social experience co-exist with people's focus and intention in life.
+    </p>
+    <br>
+    <p class="sub-text">
+      Joining our team, you'll become a part of shaping how future generations think and interact with the internet.
+    </p>
+  </section>
+
+  <!-- Location -->
+  <section class="location">
+    <div class="location-text">
+      <h2 style="font-size: 48;">Location</h2>
+      <br>
+      <p>
+        As a sophisticated place around the origin of NoteRoom, 
+        GEC is where the headquarter is currently in Bangladesh.
+      </p>
+      <a href="#" class="btn">Check in <img class="role-arrow" src="Arrow up-right white.png" alt="">
+      </a>
+    </div>
+    <div class="location-img">
+      <img src="location.png" alt="Location">
+    </div>
+  </section>
+
+  <!-- Perks -->
+  <section class="perks">
+    <h2>Perks</h2>
+    <div class="perk-rows">
+    <div class="perk-row">
+      <span>Creative Freedom</span>
+      <span>Creative Freedom</span>
+      <span>Creative Freedom</span>
+      </div>
+      <div class="perk-row">
+      <span>Creative Freedom</span>
+      <span>Creative Freedom</span>
+      <span>Work Anywhere</span>
+      <span>Creative Freedom</span>
+      </div>
+      <div class="perk-row">
+      <span>Creative Freedom</span>
+      <span>Mental Wellbeing Support</span>
+      <span>Creative Freedom</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section class="roles">
+    <h2>Roles Available</h2>
+    <div class="role-list">
+      <a href="#">LLM Engineer </a>
+      <a href="#">Frontend Engineer </a>
+      <a href="#">Backend Engineer </a>
+      <a href="#">User Experience Designer </a>
+      <a href="#">User Interface Designer </a>
+      <a href="#">Content Creator </a>
+      <a href="#">SEO & Discovery Specialist </a>
+      <a href="#">Graphic Designer </a>
+      <a href="#">Marketing Specialist </a>
+    </div>
+    <p class="note">
+      Even if these job titles don't depict you, you can still offer us what value you could be providing. 
+      We'll be happy to consider it, if it's a real fit.
+    </p>
+  </section>
+
+  <!-- Footer CTA -->
+
+  <footer class="cta">
+  <div class="cta-text">
+    <h2><span style="color: gray; font-weight: 600;">Join</span> <strong>NoteRoom Team</strong></h2>
+    <p>Ideas live here, so do We</p>
+  </div>
+  <button class="apply-btn">Apply</button>
+</footer>
+
+   
+     
+
+  <script>
+
+    // GSAP Animations
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero
+gsap.from(".hero h1", { 
+  opacity: 0, 
+  y: 40, 
+  duration: 1 
+});
+
+gsap.from(".hero p", { 
+  opacity: 0, 
+  y: 40, 
+  duration: 1 
+});
+
+gsap.from(".hero-img", { 
+  opacity: 0, 
+  scale: 0.9, 
+  duration: 1, 
+  delay: 0.5 
+});
+
+// Scroll Animations
+gsap.utils.toArray(".location, .perks, .roles, .cta").forEach((section) => {
+  gsap.from(section, {
+    opacity: 0,
+    y: 60,
+    duration: 1,
+    scrollTrigger: {
+      trigger: section,
+      start: "top 80%"
+    }
+  });
+});
+
+  
+  </script>
+</body>
+</html>
