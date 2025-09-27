@@ -1,0 +1,79 @@
+:root{
+      --bg: #ffffff;
+      --muted: #8b8b8b;
+      --accent: #007a79;
+      --accent-dark: #006a66;
+      --input-bg: #ffffff;
+      --max-center-width: 1200px;
+      --p: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --logo-font: "Bruno Ace", var(--p);
+      --role-arrow-size: 20px;      
+      --role-arrow-right: 18px;     
+      --role-arrow-opacity: 1;
+      --btn-arrow-size: 16px;    
+      --btn-arrow-right: 12px; 
+    }
+
+    html,body{ height:100%; margin:0; font-family:var(--p); background:var(--bg); color:#111; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-x:hidden; font-family: 'Poppins', sans-serif; color: #111; background: #fff; line-height: 1.6; padding: 0 2rem;}
+
+    /* page */
+    .page { min-height:100vh; display:flex; flex-direction:column; align-items:stretch; position:relative; }
+
+
+    /* NAVBAR */
+    header.nav {  transition: background 0.3s ease, backdrop-filter 0.3s ease; display:flex; align-items:center; justify-content:space-between; padding:28px 72px; gap:24px; position:relative; z-index:30; }
+    .nav-left { display:flex; align-items:center; gap:16px; min-width:120px; }
+    .logo { font-family:var(--logo-font); font-size:20px; letter-spacing:1px; font-weight:400; color:#000; display:flex; align-items:center; height:28px; }
+    .nav-right { display:flex; gap:16px; align-items:center; z-index:30; }
+    .nav-link { display:inline-flex; align-items:center; gap:10px; background:#f4f4f4; padding:10px 18px; border-radius:28px; font-size:14px; color:#333; text-decoration:none; box-shadow: 0 1px 0 rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.04); }
+    .nav-link:hover { transform: translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    .nav-link .arrow-placeholder{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; }
+    .nav-link .arrow-placeholder img{ width:12px; height:12px; display:block; object-fit:contain; }
+    .nav-cta { padding:10px 22px; border-radius:28px; border:1px solid rgba(0,0,0,0.12); background:transparent; }
+
+
+
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* CTA Footer */
+.cta {
+  display: flex;
+  justify-content: space-between;   
+  align-items: center; 
+  max-width: 700px;               
+  margin-left: 22rem;               
+  padding: 2rem 1rem;
+  border-top: 1px solid #eee;
+  gap: 5px;
+  border: none;
+}
+
+.cta-text {
+  text-align: left;
+}
+
+.cta-text h2 {
+  margin-bottom: 0.5rem;
+}
+
+.apply-btn {
+  padding: 0.8rem 4rem;
+  border: none;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.apply-btn:hover {
+  background: #333;
+}
